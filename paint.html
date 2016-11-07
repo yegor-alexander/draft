@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      button {
+        margin: 1em;
+      }
+      canvas {
+        margin: 1em;
+        padding: 0;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btnClear">clear</button>
+    <br>
+    <canvas id="paint" width="640" height="480"></canvas>
+    <script>
+      var canvas = document.getElementById('paint');
+      var ctx = canvas.getContext('2d');
+      var drawing = false;
+      canvas.addEventListener('mousedown', function(evt) {
+        drawing = true;
+      }, false);
+      canvas.addEventListener('mouseup', function(evt) {
+        drawing = false;
+      }, false);
+      canvas.addEventListener('mousemove', function(evt) {
+        if (drawing) {
+          var x = evt.offsetX;
+          var y = evt.offsetY;
+          ctx.fillRect(x,y,1,1);
+        }
+      }, false);
+      document.getElementById("btnClear").addEventListener("click", function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+    </script>
+  </body>
+</html>
